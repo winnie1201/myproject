@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goofu handmade菓馥手作</title>
+    <style>
+        body{
+            width:100%;   /*寬度100%*/
+            height:100%;
+            text-align:center;  /*文字居中*/
+            background-color:rgb(248, 227, 230);  /*背景顏色*/
+        }
+        .tag{
+            margin-right:20px;  /*與右邊區塊間隔20像素*/
+            cursor:pointer;  /*滑鼠游標設定*/
+            letter-spacing:2px;   /*字元間距2像素*/
+        }
+        .current-tag{
+            color:rgb(136, 79, 10);
+            margin-right:20px;  /*與右邊區塊間隔20像素*/
+            letter-spacing:2px;  /*字元間距2像素*/
+            cursor:pointer;  /*滑鼠游標設定*/
+        }
+        .container{
+            width:100%;
+        }
+        .head{
+            font-weight:bold; /*文字粗體*/
+            font-size:18px;  /*文字大小*/
+            display:flex;   /*區塊並排*/
+            line-height: 15px;  /*行高15像素*/
+        }
+        .head ul{
+            list-style: none; /*清單樣式*/
+            display:flex;  /*區塊並排*/
+            margin:auto;  /*區塊置中*/
+            
+        }
+        
+        .box{
+            width:300px;  /*格子寬度*/
+            height:150px;  /*格子高度*/
+            background-color:rgb(233, 188, 196);   /*格子背景顏色*/
+            position:fixed;left:50%;top:50%;margin-left:-150px;   /*位置浮起且固定於左上方，將位置設定左邊及上方各50%再將區塊間距設為-150巷素，則格子置中*/
+            border:1px solid rgb(233, 188, 196);  /*1像素橘色的邊框*/
+            border-radius:5px;   /*格子圓角設定5像素*/
+            box-shadow:0px 0px 5px #000000;  /*格子陰影*/
+            color:rgb(38, 33, 107);
+            opacity:0; /*透明設定 0為預設不顯示；1為預設顯示*/
+        }
+        .boxtitle{
+            font-weight:bold;
+            background-color:#eeeeee;
+            height:30px;
+            margin:auto;
+            border-radius:2px;
+            line-height:30px;
+        }
+        .boxinside{
+            font-weight:bold;
+            margin-top:30px;
+            font-size:20px;
+            color:rgb(19, 74, 177);
+        }
+        .btn{
+            background-color:cornsilk;
+            border-radius:5px;  /*邊框圓角5像素*/
+            font-weight:bold;
+            color:rgb(19, 74, 177);
+            cursor:pointer;  /*滑鼠游標設定*/
+        }
+        .footer{
+            background-color:rgba(195, 245, 236, 0.774);
+            height:200px;
+           
+        }       
+        .fa-facebook {
+            color: #3b5998;
+            text-shadow: 0 0 15px #3b5998;
+            transition: all 0.5s ease;
+            margin-top: 10px;
+        }
+        .fa-instagram {
+            color: #bc2a8d;
+            text-shadow: 0 0 15px #bc2a8d;
+            transition: all 0.5s ease;
+        }
+       
+    </style>
+</head>
+<body>
+    <div style="line-height: 50px;">
+        <img src="橫標logo.jpg" width="300px;" /> 
+    </div>
+    <div class="container">
+        <div class="head">
+            <ul>
+                <li id="news" class="tag" onclick="change(1);">最新消息<br/><span style="font-size:10px;">NEWS</li>
+                <li id="goods" class="tag" onclick="change(2);">商品資訊<br/><span style="font-size:10px;">GOODS</li>
+                <li id="online" class="tag" onclick="change(3);">線上訂購<br/><span style="font-size:10px;">ONLINE STORE</li> 
+                <li id="contact" class="tag" onclick="change(4);">聯絡我們<br/><span style="font-size:10px;">CONTACT</li>  
+            </ul>
+            <ul>
+                <li id="car" class="tag" onclick="change(5);">購物車<br/><span style="font-size:10px;">SHOPPING CAR</li>
+                <li id="login" class="tag" onclick="change(6);">會員登入<br/><span style="font-size:10px;">LOGIN</li>
+                <li id="logout" class="tag" onclick="change(7);">會員登出<br/><span style="font-size:10px;">LOGOUT</li>
+            </ul>
+        </div>
+        <hr/>
+        <div>
+            <img src="雪Q餅.jpg" width="800px;">
+            <img src="巧克力.jpg" width="800px;">
+        </div>
+        <div class="footer">
+            <img src="goofu.jpg" alt="goofu圓標" width="180px;"style="margin-top:20px;">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+            <a href="http://www.facebook.com"><i class="fa fa-facebook fa-2x" ></i></a>
+            <a href="https://www.instagram.com/"><i class="fa fa-instagram fa-2x" ></i></a>  
+        </div>
+    </div>
+    
+    <div id="sell" class="box" style="transition:opacity 0.5s;"> 
+        <div class="boxtitle">即將前往購物車</div>
+        <div class="boxinside">確定要結帳了嗎?</div>
+        <div style="margin-top:25px;">
+        <button class="btn" onclick="yes()">是的(Yes)</button>
+        <button class="btn" onclick="no()">不了，我在逛逛(No)</button>
+        </div>
+    </div>
+    
+
+    
+    <script>
+        function change(index){
+            let news=window.document.getElementById("news");
+            let goods=window.document.getElementById("goods");
+            let online=window.document.getElementById("online");
+            let contact=window.document.getElementById("contact");
+            let car=window.document.getElementById("car"); 
+            let login=window.document.getElementById("login");
+            let logout=window.document.getElementById("logout");
+            let sell=window.document.getElementById("sell");
+            if(index==1){
+                news.className="current-tag";
+                goods.className="tag";
+                online.className="tag";
+                contact.className="tag";
+                car.className="tag";
+                login.className="tag";
+                logout.className="tag";
+                
+            }else if(index==2){
+                news.className="tag";
+                goods.className="current-tag";
+                online.className="tag";
+                contact.className="tag";
+                car.className="tag";
+                login.className="tag";
+                logout.className="tag";
+            }else if(index==3){
+                news.className="tag";
+                goods.className="tag";
+                online.className="current-tag";
+                contact.className="tag";
+                car.className="tag";
+                login.className="tag";
+                logout.className="tag";
+            }else if(index==4){
+                news.className="tag";
+                goods.className="tag";
+                online.className="tag";
+                contact.className="current-tag";
+                car.className="tag";
+                login.className="tag";
+                logout.className="tag"; 
+            }else if(index==5){
+                news.className="tag";
+                goods.className="tag";
+                online.className="tag";
+                contact.className="tag";
+                car.className="current-tag";
+                login.className="tag";
+                logout.className="tag";
+                sell.style.opacity=1;
+            }else if(index==6){
+                news.className="tag";
+                goods.className="tag";
+                online.className="tag";
+                contact.className="tag";
+                car.className="tag";
+                login.className="current-tag";
+                logout.className="tag";
+            }else if(index==7){
+                news.className="tag";
+                goods.className="tag";
+                online.className="tag";
+                contact.className="tag";
+                car.className="tag";
+                login.className="tag";
+                logout.className="current-tag";
+            }
+        }
+       
+        function no(){
+            let element=window.document.getElementById("sell");
+            element.style.opacity=0;
+        }
+
+        function yes(){
+            let element=window.document.getElementById("sell");
+            element.style.opacity=0;
+        }
+    </script>
+</body>
+</html>
